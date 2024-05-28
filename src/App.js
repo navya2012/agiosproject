@@ -1,24 +1,79 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react'
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./Components/Routes/AppRoutes";
+import { AuthProvider } from './Components/AgiosProject/Containers/Authentication/AuthProvider';
+import ScrollToTop from './Components/Routes/ScrollToTop';
+
 
 function App() {
+  const baseURLServices = '/agios/services'
+
+  const menuList = [
+    {
+      menuItem: 'Agriculture Products',
+      path: '/agriculture-products'
+    },
+    {
+      menuItem: 'Organic Products',
+      path: '/organic-products'
+    },
+    {
+      menuItem: 'Fresh Vegetables',
+      path: '/fresh-vegetables'
+    },
+    {
+      menuItem: 'Dairy Products',
+      path: '/dairy-products'
+    },
+    {
+      menuItem: 'Harvest',
+      path: '/harvest'
+    }
+
+  ]
+
+
+  const [cart, setCart] = useState([])
+  const [cartSelected, setCartSelected] = useState({})
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
+
+
+  const handleCart = (item) => {
+    console.log(item)
+    if (!cartSelected[item.id]) {
+      // Update cart state
+      const updatedCart = [...cart, item];
+      setCart(updatedCart);
+      // Update cartSelected state
+      const updatedCartSelected = { ...cartSelected, [item.id]: true };
+      setCartSelected(updatedCartSelected);
+
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+    }
+  };
+
+
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <AuthProvider>
+        <BrowserRouter>
+          <ScrollToTop>
+            <AppRoutes menuList={menuList} url={baseURLServices} projects={{ cart, setCart, handleCart, cartSelected, setCartSelected }} />
+          </ScrollToTop>
+        </BrowserRouter>
+      </AuthProvider>
+    </>
   );
 }
 

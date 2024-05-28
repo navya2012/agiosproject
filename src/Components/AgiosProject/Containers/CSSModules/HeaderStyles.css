@@ -1,0 +1,31 @@
+
+
+.header-container{
+    background-image: url('../../../../Assets/Agios/headers-img.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 300px;
+    position: relative;
+    top: -10px;
+    z-index: -1;
+}
+.header-container .header-content{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 45vh;
+}
+.header-container .header-content .heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.header-container .header-content .heading p{
+    text-transform: uppercase;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+}

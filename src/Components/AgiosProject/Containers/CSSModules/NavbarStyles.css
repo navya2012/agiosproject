@@ -1,0 +1,35 @@
+nav .nav-icon {
+    border-radius: 50%;
+    background-color:rgba(248, 247, 240, 1);
+    padding: 10px 15px;
+    color: black;
+}
+nav .nav-para{
+    font-size: 12px;
+    color: rgba(135, 134, 128, 1);
+}
+nav .nav-heading{
+    color: rgba(31, 30, 23, 1);
+    font-size: 14px;
+    font-weight: 700;
+}
+nav .button-style{
+    color: white;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background-color: rgba(75, 175, 71, 1);
+}
+
+
+@media(max-width:1024px){
+     .nav-icons{
+        display: none;
+    }
+}
+
+/* navbar */
+nav .nav-item  .active{
+    color: black;
+    font-weight: bold;
+}
